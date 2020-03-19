@@ -34,6 +34,30 @@
 // .data() 要素のdata属性を取得します。
 // .width() 要素の幅を取得します。
 // .length 要素の個数を取得します。
+$(function() {
+  const $btn = $('.slider-ctrl-btn');
+  const $list = $('.slider-list');
+  const $listItem = $list.find('li');
+  const listWidth = $listItem.width();
+  const listLength = $listItem.length;
+  let current = 0;
+
+  $btn.on('click', function() {
+    const ctrl = $(this).data('ctrl');
+    if(ctrl === 'next') {
+      current++;
+      if(current > listLength - 1) {
+        current = 0;
+      }
+    } else if(ctrl === 'prev') {
+      current--;
+      if(current < 0) {
+        current = listLength - 1;
+      }
+    }
+    $list.animate({left: - current * listWidth + 'px'});
+  });  
+});
 </script>
 </body>
 </html>
